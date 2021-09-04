@@ -2,11 +2,11 @@
  * @Author: sharebravery
  * @Date: 2021-09-04 08:11:58
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 09:17:42
+ * @LastEditTime: 2021-09-04 14:25:13
  * @Weather: ~(～￣▽￣)～
 -->
 <template>
-  <div class="home">home</div>
+  <div class="home"><a-button type="primary"> Primary </a-button></div>
 </template>
 
 <script lang="ts">

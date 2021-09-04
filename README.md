@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 08:57:00
+ * @LastEditTime: 2021-09-04 21:06:36
  * @Weather: ~(～￣▽￣)～
 -->
 # m-y-management-sys
@@ -25,6 +25,9 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
+```
+```
+yarn lint --fix
 ```
 
 ### Customize configuration

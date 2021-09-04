@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 13:19:28
+ * @LastEditTime: 2021-09-04 14:25:52
  * @Weather: ~(～￣▽￣)～
  */
 import Vue from "vue";
@@ -14,11 +14,10 @@ const routes: Array<RouteConfig> = [
     path: "*",
     redirect: "/"
   },
-    // webpackChunkName：懒加载后的文件名
   {
     path: "/",
     name: "Home",
-    component: () => import(/* webpackChunkName: "home" */"@/views/home/index.vue")
+    component: () => import("@/views/home/index.vue")
   }
 ];
 

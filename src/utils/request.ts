@@ -5,14 +5,14 @@
  * @LastEditTime: 2021-09-04 09:28:17
  * @Weather: ~(～￣▽￣)～
  */
-import Vue from 'vue'
+import Vue from "vue";
 import axios, { AxiosRequestConfig } from "axios";
 // import { UserModule } from '@/store/modules/user'
 
 // 配置新建一个 axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
-  timeout: 10000,
+  timeout: 10000
   // headers: { 'Content-Type': 'application/json' },
 });
 
@@ -39,7 +39,7 @@ service.interceptors.request.use(
 
     return config;
   },
-  (error) => {
+  error => {
     // 对请求错误做些什么
     return Promise.reject(error);
   }
@@ -47,24 +47,24 @@ service.interceptors.request.use(
 
 // 添加响应拦截器
 service.interceptors.response.use(
-  (response) => {
+  response => {
     // 对响应数据做点什么
-		const res = response.data;
-		if (res.code && res.code !== 0) {
-			// `token` 过期或者账号已在别处登录
-			if (res.code === 401 || res.code === 4001) {
-				// Session.clear(); // 清除浏览器全部临时缓存
-				window.location.href = '/'; // 去登录页
-				// ElMessageBox.alert('你已被登出，请重新登录', '提示', {})
-					// .then(() => {})
-					// .catch(() => {});
-			}
-			// return Promise.reject(service.interceptors.response);
-		} else {
-			return response.data;
-		}
+    const res = response.data;
+    if (res.code && res.code !== 0) {
+      // `token` 过期或者账号已在别处登录
+      if (res.code === 401 || res.code === 4001) {
+        // Session.clear(); // 清除浏览器全部临时缓存
+        window.location.href = "/"; // 去登录页
+        // ElMessageBox.alert('你已被登出，请重新登录', '提示', {})
+        // .then(() => {})
+        // .catch(() => {});
+      }
+      // return Promise.reject(service.interceptors.response);
+    } else {
+      return response.data;
+    }
   },
-  (error) => {
+  error => {
     // 对响应错误做点什么
     if (error && error.response) {
       switch (error.response.status) {
@@ -78,7 +78,7 @@ service.interceptors.response.use(
           console.log("其他错误信息");
       }
     }
-    Vue.prototype.$toast.show(error, 'error') // 统一报错方式
+    Vue.prototype.$toast.show(error, "error"); // 统一报错方式
     return error;
   }
 );

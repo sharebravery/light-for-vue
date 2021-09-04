@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 09:04:40
+ * @LastEditTime: 2021-09-04 14:41:23
  * @Weather: ~(～￣▽￣)～
  */
 let proxyTarget = process.env.VUE_APP_API_BASE_URL;
@@ -21,10 +21,10 @@ module.exports = {
         // content: "components/content",
         // common: "components/common",
         assets: "@/assets",
-        services: "@/services",
-        views: "@/views",
-      },
-    },
+        plugins: "@/plugins",
+        views: "@/views"
+      }
+    }
   },
   devServer: {
     open: true,
@@ -34,9 +34,9 @@ module.exports = {
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          "^/api": "",
-        },
-      },
-    },
-  },
+          "^/api": ""
+        }
+      }
+    }
+  }
 };

@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 09:15:49
+ * @LastEditTime: 2021-09-04 14:33:33
  * @Weather: ~(～￣▽￣)～
  */
 module.exports = {
@@ -16,11 +16,11 @@ module.exports = {
 
   singleQuote: false, // 使用单引号而非双引号
 
-  trailingComma: 'none', // 在任何可能的多行中输入尾逗号
+  trailingComma: "none", // 在任何可能的多行中输入尾逗号
 
   bracketSpacing: true, // 在对象字面量声明所使用的的花括号后（{）和前（}）输出空格
 
-  arrowParens: 'avoid', // 为单行箭头函数的参数添加圆括号，参数个数为1时可以省略圆括号
+  arrowParens: "avoid", // 为单行箭头函数的参数添加圆括号，参数个数为1时可以省略圆括号
 
   // TODO: 暂时注释，会报错
   // parser: 'babylon', // 指定使用哪一种解析器
@@ -31,11 +31,12 @@ module.exports = {
 
   rangeEnd: Infinity, // 只格式化某个文件的一部分
 
-  filepath: 'none', // 指定文件的输入路径，这将被用于解析器参照
+  filepath: "none", // 指定文件的输入路径，这将被用于解析器参照
 
   requirePragma: false, // (v1.7.0+) Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码，这些注释称为“require pragma”(必须杂注)
 
   insertPragma: false, //  (v1.8.0+) Prettier可以在文件的顶部插入一个 @format的特殊注释，以表明改文件已经被Prettier格式化过了。
 
-  proseWrap: 'preserve' // (v1.8.2+)
-}
+  proseWrap: "preserve", // (v1.8.2+)
+  endOfLine: "auto"
+};
