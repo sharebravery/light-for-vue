@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 14:25:52
+ * @LastEditTime: 2021-09-12 10:54:16
  * @Weather: ~(～￣▽￣)～
  */
 import Vue from "vue";
@@ -12,10 +12,15 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "*",
-    redirect: "/"
+    redirect: "/login"
   },
   {
-    path: "/",
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/login/index.vue")
+  },
+  {
+    path: "/home",
     name: "Home",
     component: () => import("@/views/home/index.vue")
   }

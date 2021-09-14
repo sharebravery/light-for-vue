@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 14:33:33
+ * @LastEditTime: 2021-09-06 22:15:39
  * @Weather: ~(～￣▽￣)～
  */
 module.exports = {
@@ -38,5 +38,6 @@ module.exports = {
   insertPragma: false, //  (v1.8.0+) Prettier可以在文件的顶部插入一个 @format的特殊注释，以表明改文件已经被Prettier格式化过了。
 
   proseWrap: "preserve", // (v1.8.2+)
+
   endOfLine: "auto"
 };

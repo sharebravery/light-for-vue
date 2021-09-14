@@ -2,10 +2,10 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-04 21:06:36
+ * @LastEditTime: 2021-09-11 07:56:26
  * @Weather: ~(～￣▽￣)～
 -->
-# m-y-management-sys
+# light-for-vue
 
 ## Project setup
 ```
@@ -14,7 +14,7 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn serve OR click run.bat
 ```
 
 ### Compiles and minifies for production
@@ -25,9 +25,6 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
-```
-```
-yarn lint --fix
 ```
 
 ### Customize configuration
