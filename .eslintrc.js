@@ -3,7 +3,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-11-20 19:31:14
+ * @LastEditTime: 2021-11-20 22:35:38
  * @Weather: ~(～￣▽￣)～
  */
 module.exports = {
@@ -30,24 +30,29 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": "off", // 关闭类型推断
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "eol-last": 0,
+    "no-async-promise-executor": "off",
+    "no-useless-escape": "off",
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-unused-vars": "off",
+    "prefer-const": "off",
     indent: [2, 2, { SwitchCase: 1 }],
-    "space-before-function-paren": ["error", "never"],
-    "vue/array-bracket-spacing": "error",
-    "vue/arrow-spacing": "error",
-    "vue/block-spacing": "error",
-    "vue/brace-style": "error",
-    "vue/camelcase": "error",
+    // "space-before-function-paren": ["error", "never"],
+    // "vue/array-bracket-spacing": "error",
+    // "vue/arrow-spacing": "error",
+    // "vue/block-spacing": "error",
+    // "vue/brace-style": "error",
+    // "vue/camelcase": "error",
     "vue/comma-dangle": "error",
     "vue/component-name-in-template-casing": ["error", "kebab-case"],
     "vue/eqeqeq": "error",
-    "vue/key-spacing": "error",
-    "vue/match-component-file-name": "error",
-    "vue/object-curly-spacing": "error",
-    "prefer-const": "off"
+    // "vue/key-spacing": "error",
+    "vue/match-component-file-name": "error"
+    // "vue/object-curly-spacing": "error",
   },
   overrides: [
     {

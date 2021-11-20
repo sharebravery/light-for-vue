@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-17 10:10:32
+ * @LastEditTime: 2021-11-20 22:27:10
  * @Weather: ~(～￣▽￣)～
  */
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
@@ -31,20 +31,21 @@ module.exports = {
       }
     }
   },
-  // configureWebpack: {
-  //   mode: process.env.production ? "production" : "development",
-  //   // devtool: process.env.NODE_ENV ? "source-maps" : "eval",
-  //   resolve: {
-  //     alias: {
-  //       components: "@/components",
-  //       // content: "components/content",
-  //       // common: "components/common",
-  //       assets: "@/assets",
-  //       plugins: "@/plugins",
-  //       views: "@/views"
-  //     }
-  //   },
-  // },
+
+  configureWebpack: {
+    mode: process.env.production ? "production" : "development",
+    devtool: process.env.NODE_ENV ? "source-maps" : "eval",
+    resolve: {
+      alias: {
+        components: "@/components",
+        // content: "components/content",
+        // common: "components/common",
+        assets: "@/assets",
+        plugins: "@/plugins",
+        views: "@/views"
+      }
+    }
+  },
 
   configureWebpack: config => {
     config.performance = {
