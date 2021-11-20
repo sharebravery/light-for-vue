@@ -1,3 +1,11 @@
+/*
+ * @Description: ^_^
+ * @Author: sharebravery
+ * @Date: 2021-08-25 10:37:57
+ * @LastEditors: sharebravery
+ * @LastEditTime: 2021-11-20 19:31:14
+ * @Weather: ~(～￣▽￣)～
+ */
 module.exports = {
   root: true,
   env: {
@@ -19,8 +27,13 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "off", //关闭定义未使用警告
+    "@typescript-eslint/no-inferrable-types": "off", // 关闭类型推断
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/camelcase": 0,
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-unused-vars": "off",
     indent: [2, 2, { SwitchCase: 1 }],
     "space-before-function-paren": ["error", "never"],
     "vue/array-bracket-spacing": "error",
@@ -33,17 +46,15 @@ module.exports = {
     "vue/eqeqeq": "error",
     "vue/key-spacing": "error",
     "vue/match-component-file-name": "error",
-    "vue/object-curly-spacing": "error"
-  }
-  // overrides: [
-  //   {
-  //     files: [
-  //       '**/__tests__/*.{j,t}s?(x)',
-  //       '**/tests/unit/**/*.spec.{j,t}s?(x)'
-  //     ],
-  //     env: {
-  //       jest: true
-  //     }
-  //   }
-  // ]
+    "vue/object-curly-spacing": "error",
+    "prefer-const": "off"
+  },
+  overrides: [
+    {
+      files: ["**/__tests__/*.{j,t}s?(x)", "**/tests/unit/**/*.spec.{j,t}s?(x)"],
+      env: {
+        jest: true
+      }
+    }
+  ]
 };

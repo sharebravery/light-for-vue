@@ -2,7 +2,7 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-13 20:18:01
+ * @LastEditTime: 2021-09-17 11:14:24
  * @Weather: ~(～￣▽￣)～
  */
 import axios, { AxiosRequestConfig } from "axios";
@@ -13,7 +13,7 @@ import { Modal, message, notification } from "ant-design-vue";
 // 配置新建一个 axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
-  timeout: 10000,
+  timeout: 10000
   // headers: { "Content-Type": "application/json" }
 });
 

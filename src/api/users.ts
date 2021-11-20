@@ -3,7 +3,7 @@
  * @Author: sharebravery
  * @Date: 2021-09-05 17:09:15
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-13 21:36:57
+ * @LastEditTime: 2021-11-20 19:32:09
  * @Weather: ~(～￣▽￣)～
  */
 import request from "@/utils/request";
@@ -19,17 +19,42 @@ export class Users {
     });
   }
 
-  static async getUsers<T>(params?: T): Promise<AxiosResponse> {
+  static async createUser<T>(data: T): Promise<AxiosResponse> {
     return request({
-      url: "/users",
+      method: "POST",
+      url: `/api/users/createUser`,
+      data,
+      responseType: "json"
+    });
+  }
+
+  static async getAllUsers<T>(params?: T): Promise<AxiosResponse> {
+    return request({
+      url: `/api/User/GetAllUsers`,
       method: "get"
     });
   }
 
   static async login<T>(data?: T): Promise<AxiosResponse> {
     return request({
-      url: "/users/login",
-      method: "post",
+      url: `/api/Account/SignIn`,
+      method: "POST",
+      data
+    });
+  }
+
+  static async getUserInfo<T>(data?: T): Promise<AxiosResponse> {
+    return request({
+      url: `/api/users/info`,
+      method: "POST",
+      data
+    });
+  }
+
+  static async logout<T>(data?: T): Promise<AxiosResponse> {
+    return request({
+      url: `/api/users/logout`,
+      method: "POST",
       data
     });
   }
@@ -42,13 +67,6 @@ export async function getUsers<T>(params?: T): Promise<AxiosPromise<T>> {
     params
   });
 }
-
-export const getUserInfo = (data: any) =>
-  request({
-    url: "/users/info",
-    method: "post",
-    data
-  });
 
 export const getUserByName = (username: string) =>
   request({

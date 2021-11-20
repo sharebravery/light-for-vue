@@ -2,13 +2,13 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-13 19:52:30
+ * @LastEditTime: 2021-09-17 10:10:32
  * @Weather: ~(～￣▽￣)～
  */
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
 const proxyTarget = process.env.VUE_APP_API_BASE_URL;
-console.log("%c [ proxyTarget ]", "font-size:13px; background:pink; color:#bf2c9f;", proxyTarget);
+console.log("[ proxyTarget ]", proxyTarget);
 const isProd = process.env.NODE_ENV === "production";
 const productionGzipExtensions = ["js", "css"];
 

@@ -1,42 +1,25 @@
-/*
- * @Description: ^_^
- * @Author: sharebravery
- * @Date: 2021-09-05 09:01:02
- * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-05 23:49:34
- * @Weather: ~(～￣▽￣)～
- */
 import { VuexModule, Module, Action, Mutation, getModule } from "vuex-module-decorators";
-import { login, logout, getUserInfo } from "@/api/users";
-// import { getToken, setToken, removeToken } from '@/utils/cookies'
-// import router, { resetRouter } from "@/router";
-// import { PermissionModule } from "./permission";
-// import { TagsViewModule } from "./tags-view";
+import { getToken, setToken, removeToken } from "@/utils/cookies";
+// import router, { resetRouter } from '@/router'
+// import { PermissionModule } from './permission'
+// import { TagsViewModule } from './tags-view'
 import store from "@/store";
+import * as api from "@/api";
+import * as models from "@/models";
 
 export interface IUserState {
-  token: string | null;
-  refresh_token: string | null;
-  expires_time: Date | null;
-  avatar: string;
-  introduction: string | null;
-  /** 姓名 */
+  token: string;
   name: string;
-  /** 用户名（登录名） */
-  userName: string;
-  userId: number | null;
+  avatar: string;
+  introduction: string;
   roles: string[];
-  email: string | null;
+  email: string;
 }
 
 @Module({ dynamic: true, store, name: "user" })
 class User extends VuexModule implements IUserState {
-  public token = "";
-  public refresh_token = "";
-  public expires_time = null;
+  public token = getToken() || "";
   public name = "";
-  public userName = "";
-  public userId = null;
   public avatar = "";
   public introduction = "";
   public roles: string[] = [];
@@ -73,17 +56,19 @@ class User extends VuexModule implements IUserState {
   }
 
   @Action
-  public async Login(userInfo: { username: string; password: string }) {
+  public async Login(userInfo: models.Account) {
     let { username, password } = userInfo;
     username = username.trim();
-    const { data } = await login({ username, password });
-    // setToken(data.accessToken);
+    const { data } = await api.Users.login({ username, password });
+    data["accessToken"] = "TOKEN_" + new Date().toString();
+    setToken(data.accessToken);
     this.SET_TOKEN(data.accessToken);
+    return data;
   }
 
   @Action
   public ResetToken() {
-    // removeToken();
+    removeToken();
     this.SET_TOKEN("");
     this.SET_ROLES([]);
   }
@@ -93,13 +78,13 @@ class User extends VuexModule implements IUserState {
     if (this.token === "") {
       throw Error("GetUserInfo: token is undefined!");
     }
-    const { data } = await getUserInfo({
+    const { data } = await api.Users.getUserInfo({
       /* Your params here */
     });
     if (!data) {
       throw Error("Verification failed, please Login again.");
     }
-    const { roles, name, userName, avatar, introduction, email } = data.user;
+    const { roles, name, avatar, introduction, email } = data.user;
     // roles must be a non-empty array
     if (!roles || roles.length <= 0) {
       throw Error("GetUserInfo: roles must be a non-null array!");
@@ -116,17 +101,17 @@ class User extends VuexModule implements IUserState {
     // Dynamically modify permissions
     const token = role + "-token";
     this.SET_TOKEN(token);
-    // setToken(token);
+    setToken(token);
     await this.GetUserInfo();
-    // resetRouter();
+    // resetRouter()
     // // Generate dynamic accessible routes based on roles
-    // PermissionModule.GenerateRoutes(this.roles);
+    // PermissionModule.GenerateRoutes(this.roles)
     // // Add generated routes
     // PermissionModule.dynamicRoutes.forEach(route => {
-    //   router.addRoute(route);
-    // });
+    //   router.addRoute(route)
+    // })
     // // Reset visited views and cached views
-    // TagsViewModule.delAllViews();
+    // TagsViewModule.delAllViews()
   }
 
   @Action
@@ -134,12 +119,12 @@ class User extends VuexModule implements IUserState {
     if (this.token === "") {
       throw Error("LogOut: token is undefined!");
     }
-    await logout();
-    // removeToken();
-    // resetRouter();
+    await api.Users.logout();
+    removeToken();
+    // resetRouter()
 
     // // Reset visited views and cached views
-    // TagsViewModule.delAllViews();
+    // TagsViewModule.delAllViews()
     this.SET_TOKEN("");
     this.SET_ROLES([]);
   }
