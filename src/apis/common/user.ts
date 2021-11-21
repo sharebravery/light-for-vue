@@ -3,19 +3,18 @@
  * @Author: sharebravery
  * @Date: 2021-09-05 17:09:15
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-11-20 19:32:09
+ * @LastEditTime: 2021-11-21 13:45:36
  * @Weather: ~(～￣▽￣)～
  */
 import request from "@/utils/request";
 import { AxiosPromise, AxiosResponse } from "axios";
 
-export class Users {
-  static async SignIn_PostAsync(data: any): Promise<AxiosResponse> {
+export class User {
+  static async getUserInfo<T>(data?: T): Promise<AxiosResponse> {
     return request({
+      url: `/api/users/info`,
       method: "POST",
-      url: `/api/Account/SignIn`,
-      data,
-      responseType: "json"
+      data
     });
   }
 
@@ -38,14 +37,6 @@ export class Users {
   static async login<T>(data?: T): Promise<AxiosResponse> {
     return request({
       url: `/api/Account/SignIn`,
-      method: "POST",
-      data
-    });
-  }
-
-  static async getUserInfo<T>(data?: T): Promise<AxiosResponse> {
-    return request({
-      url: `/api/users/info`,
       method: "POST",
       data
     });

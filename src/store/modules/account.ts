@@ -1,10 +1,10 @@
 import { VuexModule, Module, Action, Mutation, getModule } from "vuex-module-decorators";
 import { getToken, setToken, removeToken } from "@/utils/cookies";
-// import router, { resetRouter } from '@/router'
-// import { PermissionModule } from './permission'
+import router, { resetRouter } from "@/router";
+import { PermissionModule } from "./permission";
 // import { TagsViewModule } from './tags-view'
 import store from "@/store";
-import * as api from "@/api";
+import * as api from "@/apis";
 import * as models from "@/models";
 
 export interface IUserState {
@@ -59,8 +59,10 @@ class User extends VuexModule implements IUserState {
   public async Login(userInfo: models.Account) {
     let { username, password } = userInfo;
     username = username.trim();
-    const { data } = await api.Users.login({ username, password });
-    data["accessToken"] = "TOKEN_" + new Date().toString();
+    const { data } = await api.Account.SignIn_PostAsync(userInfo);
+    if (data.succeeded) {
+      data["accessToken"] = "ACCESS_TOKEN_" + new Date().toString();
+    }
     setToken(data.accessToken);
     this.SET_TOKEN(data.accessToken);
     return data;
@@ -78,9 +80,9 @@ class User extends VuexModule implements IUserState {
     if (this.token === "") {
       throw Error("GetUserInfo: token is undefined!");
     }
-    const { data } = await api.Users.getUserInfo({
-      /* Your params here */
-    });
+    const { data } = await api.Account.Me_GetAsync();
+    console.log("%c [ getUserInfo ]", "font-size:13px; background:pink; color:#bf2c9f;", data);
+
     if (!data) {
       throw Error("Verification failed, please Login again.");
     }
@@ -103,13 +105,13 @@ class User extends VuexModule implements IUserState {
     this.SET_TOKEN(token);
     setToken(token);
     await this.GetUserInfo();
-    // resetRouter()
-    // // Generate dynamic accessible routes based on roles
-    // PermissionModule.GenerateRoutes(this.roles)
-    // // Add generated routes
-    // PermissionModule.dynamicRoutes.forEach(route => {
-    //   router.addRoute(route)
-    // })
+    resetRouter();
+    // Generate dynamic accessible routes based on roles
+    PermissionModule.GenerateRoutes(this.roles);
+    // Add generated routes
+    PermissionModule.dynamicRoutes.forEach(route => {
+      router.addRoute(route);
+    });
     // // Reset visited views and cached views
     // TagsViewModule.delAllViews()
   }
@@ -119,14 +121,15 @@ class User extends VuexModule implements IUserState {
     if (this.token === "") {
       throw Error("LogOut: token is undefined!");
     }
-    await api.Users.logout();
+    // await api.Account.logout();
     removeToken();
-    // resetRouter()
+    resetRouter(); // 重新实例化router
 
     // // Reset visited views and cached views
     // TagsViewModule.delAllViews()
     this.SET_TOKEN("");
     this.SET_ROLES([]);
+    // localStorage.clear();
   }
 }
 

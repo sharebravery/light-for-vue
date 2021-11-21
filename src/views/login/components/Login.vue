@@ -3,7 +3,7 @@
  * @Author: sharebravery
  * @Date: 2021-09-12 09:13:35
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-11-20 22:36:09
+ * @LastEditTime: 2021-11-21 13:55:43
  * @Weather: ~(～￣▽￣)～
 -->
 <template>
@@ -35,12 +35,11 @@
 
 <script lang="ts">
 import { Component, Ref, Vue, Watch } from "vue-property-decorator";
-import * as api from "@/api";
+// import * as api from "@/api";
 import * as models from "@/models";
 import { UserModule } from "@/store/modules/account";
 import { FormModel } from "ant-design-vue";
 import { Route } from "vue-router";
-import { Dictionary } from "vue-router/types/router";
 
 @Component
 export default class Login extends Vue {
@@ -66,16 +65,17 @@ export default class Login extends Vue {
       if (valid) {
         try {
           const result = await UserModule.Login(this.userForm);
-          this.$message.success("登录成功");
+          console.log("%c [ result ]", "font-size:13px; background:pink; color:#bf2c9f;", result);
           if (result && result.succeeded) {
             const to =
               this.route.query.redirect &&
               this.route.query.redirect !== "/404" &&
               this.route.query.redirect !== "/logoutReload"
                 ? this.route.query.redirect
-                : "/";
+                : "/home";
 
             this.$router.push({ path: to as any });
+            this.$message.success("登录成功");
             return;
           } else {
             this.$message.error("账号或密码错误。");

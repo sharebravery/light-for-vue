@@ -2,42 +2,44 @@
  * @Author: sharebravery
  * @Date: 2021-08-25 10:37:57
  * @LastEditors: sharebravery
- * @LastEditTime: 2021-09-17 11:14:24
+ * @LastEditTime: 2021-11-21 19:33:05
  * @Weather: ~(～￣▽￣)～
  */
 import axios, { AxiosRequestConfig } from "axios";
 import { Modal, message, notification } from "ant-design-vue";
 
-// import { UserModule } from '@/store/modules/user'
+import { UserModule } from "@/store/modules/account";
+
+const headers = { Authorization: "Bearer " + UserModule?.token };
 
 // 配置新建一个 axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
-  timeout: 10000
-  // headers: { "Content-Type": "application/json" }
+  timeout: 10000,
+  headers: headers
 });
 
 // 添加请求拦截器
-service.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
-    // 1.发送网络请求时, 在界面的中间位置显示Loading的组件
+// service.interceptors.request.use(
+//   (config: AxiosRequestConfig) => {
+//     // 1.发送网络请求时, 在界面的中间位置显示Loading的组件
 
-    // 2.某一些请求要求用户必须携带token, 如果没有携带, 那么直接跳转到登录页面
+//     // 2.某一些请求要求用户必须携带token, 如果没有携带, 那么直接跳转到登录页面
 
-    // 3.params/data序列化的操作
+//     // 3.params/data序列化的操作
 
-    // Authorization
-    // Add X-Access-Token header to every request, you can add other custom headers here
-    // if (UserModule.token) {
-    //   config.headers['X-Access-Token'] = UserModule.token
-    // }
+//     // Authorization
+//     // Add X-Access-Token header to every request, you can add other custom headers here
+//     // if (UserModule.token) {
+//     //   config.headers['X-Access-Token'] = UserModule.token
+//     // }
 
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+//     return config;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   }
+// );
 
 // 添加响应拦截器
 // service.interceptors.response.use(
@@ -99,6 +101,7 @@ service.interceptors.response.use(
     // code == 50005: username or password is incorrect
     // You can change this part for your own usage.
     const res = response.data;
+
     if (res.code !== 200) {
       Modal.confirm({ content: `错误:response=${res.message}`, title: "错误" });
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
